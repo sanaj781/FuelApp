@@ -5,20 +5,80 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- bootstrap libraries -->
-    <script
-      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
-      integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
+    <!-- CSS only -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
       crossorigin="anonymous"
-    ></script>
+    />
+    <!-- JavaScript Bundle with Popper -->
     <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js"
-      integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy"
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
       crossorigin="anonymous"
     ></script>
     <!-- end of bootstrap libraries -->
+    <link rel="stylesheet" href="style.css" />
+
     <title>FuelApp</title>
   </head>
   <body>
-    <div class="container">hello</div>
+    <div class="container">
+      <div class="row p-2" id="header">
+        <div class="col-5" id="logo">
+          <img
+            id="drabpol-logo"
+            src="imgs/DRABPOL-white2.b46e7a87b3dfaaba8c57.webp"
+            alt=""
+          />
+        </div>
+        <div class="col-5 offset-2" id="user-info">
+          <div class="row align-items-center">
+            <div class="col-6 d-flex justify-content-end p-0" id="user-name">
+              <span>Denys</span>
+            </div>
+            <div class="col-6 d-flex justify-content-end" id="user-avatar">
+              <img id="avatar" src="imgs/avatar-DSH.jpg" alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row text-center p-2" id="your-car">
+        <h5>Twój Samochód:</h5>
+        <div class="col-12">
+          <img id="car-img" src="imgs/car.png" alt="" />
+        </div>
+
+        <div class="row" id="car-description">
+          <div class="col-4" id="car-brand">Toyota Corolla</div>
+          <div class="col-4" id="car-mileage">64325 km</div>
+          <div class="col-4" id="car-plates">SC 83733</div>
+        </div>
+        <div class="col-4 offset-8">
+          <a href="#" id="change-car">Zmień Samochód</a>
+        </div>
+      </div>
+      <div class="row" id="menu">
+        <div
+          class="col-12 d-flex justify-content-center align-items-center p-5 mb-2"
+          id="menu-item"
+        >
+          Dodaj Fakturę
+        </div>
+        <div
+          class="col-12 d-flex justify-content-center align-items-center p-5 mb-2"
+          id="menu-item"
+        >
+          Moje Faktury
+        </div>
+        <div
+          class="col-12 d-flex justify-content-center align-items-center p-5 mb-2"
+          id="menu-item"
+        >
+          Raport Miesięczny
+        </div>
+      </div>
+    </div>
   </body>
 </html>

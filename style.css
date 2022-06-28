@@ -1,0 +1,30 @@
+#header {
+  background-color: #232d4f;
+  color: whitesmoke;
+}
+#drabpol-logo {
+  height: 40px;
+}
+#avatar {
+  border-radius: 100%;
+  border: 1px solid white;
+  width: 36px;
+}
+#car-img {
+  width: 100%;
+}
+#your-car {
+  font-size: 0.5em;
+}
+#change-car {
+  font-size: 0.8em;
+  text-decoration: none;
+}
+#menu {
+  color: whitesmoke;
+}
+#menu-item {
+  background-color: #233e3b;
+  height: 50px;
+  width: 100%;
+}
