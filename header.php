@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+<?php
+echo '<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -20,12 +21,13 @@
     ></script>
     <!-- end of bootstrap libraries -->
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="circle-percentage.css" />
 
     <title>FuelApp</title>
   </head>
   <body>
-    <div class="container">
-      <div class="row p-2" id="header">
+  <div class="container">
+      <div class="row py-2" id="header">
         <div class="col-5" id="logo">
           <img
             id="drabpol-logo"
@@ -44,9 +46,9 @@
           </div>
         </div>
       </div>
-      <div class="row text-center p-2" id="your-car">
-        <h5>Twój Samochód:</h5>
-        <div class="col-12">
+      <div class="row text-center py-5" id="your-car">
+        <h5 class="pb-4">Twój Samochód:</h5>
+        <div class="col-12 pb-3">
           <img id="car-img" src="imgs/car.png" alt="" />
         </div>
 
@@ -55,30 +57,7 @@
           <div class="col-4" id="car-mileage">64325 km</div>
           <div class="col-4" id="car-plates">SC 83733</div>
         </div>
-        <div class="col-4 offset-8">
+        <div class="col-5 offset-7 pt-3 justify-content-end d-flex">
           <a href="#" id="change-car">Zmień Samochód</a>
         </div>
-      </div>
-      <div class="row" id="menu">
-        <div
-          class="col-12 d-flex justify-content-center align-items-center p-5 mb-2"
-          id="menu-item"
-        >
-          Dodaj Fakturę
-        </div>
-        <div
-          class="col-12 d-flex justify-content-center align-items-center p-5 mb-2"
-          id="menu-item"
-        >
-          Moje Faktury
-        </div>
-        <div
-          class="col-12 d-flex justify-content-center align-items-center p-5 mb-2"
-          id="menu-item"
-        >
-          Raport Miesięczny
-        </div>
-      </div>
-    </div>
-  </body>
-</html>
+      </div>';
