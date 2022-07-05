@@ -44,8 +44,9 @@ a {
   border-right: 1px solid whitesmoke;
 }
 #raport-wraper,
-#add-doc-wraper {
-  margin-bottom: 50px;
+#add-doc-wraper,
+#history-wraper {
+  margin-bottom: 100px !important;
 }
 #login-form {
   height: 100vh;

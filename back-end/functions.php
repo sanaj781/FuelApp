@@ -111,16 +111,15 @@ function add_invoice()
 
                 $date = date('Y-m-d H:i:s');
                 include 'db.php';
-                $query = "INSERT INTO Invoices (plik, user, date, oddometer, amount, location)
+                $query = "INSERT INTO Invoices (plik, user, date, oddometer, amount, location, car)
                             VALUES(
                             '" . $file_name . "',
                             '" . $_SESSION['username'] . "',
-                             '" . $date . "',
-                             '" . $_POST['oddometer'] . "',
-                             '" . $_POST['amount'] . "',
-                             '" . $_POST['position'] . "'
-
-
+                            '" . $date . "',
+                            '" . $_POST['oddometer'] . "',
+                            '" . $_POST['amount'] . "',
+                            '" . $_POST['position'] . "',
+                            '" . $_SESSION['car_reg_nr'] . "'
 
                             )";
                 $result = @mysqli_query($conn, $query);
@@ -135,66 +134,22 @@ function add_invoice()
         }
     }
 }
-
-
-    // // Check if image file is a actual image or fake image
-    // if (isset($_POST["submit"])) {
-    //     $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-    //     if ($check !== false) {
-    //         echo "File is an image - " . $check["mime"] . ".";
-    //         $uploadOk = 1;
-    //     } else {
-    //         echo "File is not an image.";
-    //         $uploadOk = 0;
-    //     }
-    // }
-
-    // // Check if file already exists
-    // if (file_exists($target_file)) {
-    //     echo "Sorry, file already exists.";
-    //     $uploadOk = 0;
-    // }
-
-    // // Check file size
-    // if ($_FILES["fileToUpload"]["size"] > 500000) {
-    //     echo "Sorry, your file is too large.";
-    //     $uploadOk = 0;
-    // }
-
-    // // Allow certain file formats
-    // if (
-    //     $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-    //     && $imageFileType != "gif"
-    // ) {
-    //     echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-    //     $uploadOk = 0;
-    // }
-
-    // Check if $uploadOk is set to 0 by an error
-    // if ($uploadOk == 0) {
-    //     echo "Sorry, your file was not uploaded.";
-    //     // if everything is ok, try to upload file
-    // } else {
-    //     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-    //         $date = date('Y-m-d H:i:s');
-    //         include 'db.php';
-    //         $query = "INSERT INTO invoices (user, przebieg, kwotaFaktury, plik, data, geolocation, jazda_prywatna)
-    //             VALUES(
-    //             '" . $_POST['oddometer'] . "',
-    //             '" . $_POST['amount'] . "',
-    //             '" . $target_file . "',
-    //             '" . $date . "',
-    //             '" . $_POST['position'] . "',
-    //             '" . $_POST['description'] . "',
-    //             'wyslano do wyceny'
-    //             )";
-    //         $result = @mysqli_query($conn, $query);
-    //         if ($result) {
-    //             echo json_encode(["sent" => 1,]);
-    //         } else echo json_encode(["sent" => 0,]);
-    //         echo "The file " . htmlspecialchars(basename($_FILES["fileToUpload"]["name"])) . " has been uploaded.";
-    //     } else {
-    //         echo "Sorry, there was an error uploading your file.";
-    //     }
-    // }
 //End of Function for adding new invoice into database
+
+//Function for getting history of invoices
+function get_invoices()
+{
+    require 'db.php';
+    $invoices = [];
+    $sql = "SELECT * FROM Invoices WHERE user = '" . $_SESSION['username'] . "'";
+    $result = mysqli_query($conn, $sql);
+    $resultCheck = mysqli_num_rows($result);
+
+    if ($resultCheck > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $invoices[] = $row;
+        }
+    }
+    $_SESSION['invoices'] = $invoices;
+}
+// End Of Function for getting history of invoices
