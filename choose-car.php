@@ -2,6 +2,8 @@
 
 
     <?php
+    change_default_car();
+
     include 'back-end/db.php';
     $cars = explode(",", $_SESSION['cars']);
     foreach ($cars as $value) {
@@ -16,8 +18,11 @@
                 <img id="car-img" src="imgs/' . $row['car_img'] . '" alt="" />
     </div>
         <div class="col-3" id="car-brand">' . $row['car_model'] . '</div>
-        <div class="col-3" id="car-mileage">' . $row['oddometer'] . '</div>
         <div class="col-3" id="car-plates">' . $row['registration_nr'] . '</div>
+       
+
+        <div class="col-3" id="car-plates"> <a href="?page=choose-car&car=' . $row['id'] . '" class="btn btn-primary">Wybierz</a></div>
+
         </div>
     </div>
 

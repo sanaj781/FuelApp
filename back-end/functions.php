@@ -37,7 +37,11 @@ function user_authentification()
                 $_SESSION['logedin'] = 1;
                 $_SESSION['name'] = $row['name'];
                 $_SESSION['username'] = $username;
+                //Cars for choosing for curent user
                 $_SESSION['cars'] = $row['car_ids'];
+                //Default car for curent user
+                $_SESSION['default_car'] = $row['default_car_id'];
+                //Calling a function to get 
                 get_default_car();
                 header("Location: index.php");
             } else {
@@ -48,11 +52,11 @@ function user_authentification()
 }
 //End of User Auth Function
 
-//Function for getting a default car for a choosen user
+//Function for getting default car parameters for curent user- regNr, oddometer, carModel, carImg and storing in $_SESSION variable
 function get_default_car()
 {
     include 'db.php';
-    $select_car = mysqli_query($conn, "SELECT * FROM cars WHERE id = '" . $_SESSION['cars'] . "'");
+    $select_car = mysqli_query($conn, "SELECT * FROM cars WHERE id = '" . $_SESSION['default_car'] . "'");
     $row = mysqli_fetch_assoc($select_car);
     if (mysqli_num_rows($select_car)) {
         $_SESSION['car_reg_nr'] = $row['registration_nr'];
@@ -63,26 +67,26 @@ function get_default_car()
         header("Location: index.php?error=Wrong user or password");
     }
 }
-//End of Function for getting a default car for a choosen user
+//End of Function for getting default car parameters for curent user
 
-//Function for getting a all cars available for a choosen user
-function get_cars()
+//Function for switching default car for a choosen user
+function change_default_car()
 {
 
-
-    include 'db.php';
-    $select_available_cars = mysqli_query($conn, "SELECT * FROM cars WHERE id = '" . $_SESSION['cars'] . "'");
-    $row = mysqli_fetch_assoc($select_available_cars);
-    if (mysqli_num_rows($select_available_cars)) {
-        $_SESSION['car_reg_nr'] = $row['registration_nr'];
-        $_SESSION['car_oddometer'] = $row['oddometer'];
-        $_SESSION['car_model'] = $row['car_model'];
-        $_SESSION['car_img'] = $row['car_img'];
-    } else {
-        header("Location: index.php?error=Wrong user or password");
+    if (isset($_GET['car'])) {
+        include 'db.php';
+        $change_car = "UPDATE users SET default_car_id='" . $_GET['car'] . "' WHERE login='" . $_SESSION['username'] . "'";
+        if (mysqli_query($conn, $change_car)) {
+            $_SESSION['default_car'] = $_GET['car'];
+            get_default_car();
+            header("Location: index.php?page=raport");
+        } else {
+            echo "Error updating record: " . mysqli_error($conn);
+        }
     }
 }
-//End of Function for getting a all cars available for a choosen user
+
+//End of Function for switching default car for a choosen user
 
 //Function for adding new invoice into database
 function add_invoice()
