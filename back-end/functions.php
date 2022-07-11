@@ -79,7 +79,7 @@ function change_default_car()
         if (mysqli_query($conn, $change_car)) {
             $_SESSION['default_car'] = $_GET['car'];
             get_default_car();
-            header("Location: index.php?page=raport");
+            header("Location: index.php?page=choose-car");
         } else {
             echo "Error updating record: " . mysqli_error($conn);
         }

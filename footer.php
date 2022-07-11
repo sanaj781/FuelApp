@@ -1,8 +1,8 @@
 <div class="d-flex text-center align-items-center" id="menu">
-    <a href="?page=add-document" class="col-3 g-0">
+    <a href="?page=start-ride" class="col-3 g-0">
         <div class="" id="menu-item">
             <i class="bi bi-caret-right-fill"></i>
-            <div>Zacznij Jazdę</div>
+            <div>Rozpocznij Wyjazd</div>
         </div>
     </a>
     <a href="?page=add-document" class="col-3 g-0">
@@ -80,8 +80,21 @@
         border-right: 1px solid whitesmoke;
     }
 
-    #raport-wraper {
-        margin-bottom: 50px;
+    #raport-wraper,
+    #add-doc-wraper,
+    #history-wraper {
+        margin-bottom: 100px !important;
+    }
+
+    #login-form {
+        height: 100vh;
+    }
+
+    #choose-car {
+        font-size: 0.5em;
+        height: 50px;
+        border-bottom: 1px solid whitesmoke;
+        border-top: 1px solid whitesmoke;
     }
 
     /* start circle percent */

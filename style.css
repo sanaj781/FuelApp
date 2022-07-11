@@ -45,7 +45,8 @@ a {
 }
 #raport-wraper,
 #add-doc-wraper,
-#history-wraper {
+#history-wraper,
+#start-ride-wraper {
   margin-bottom: 100px !important;
 }
 #login-form {

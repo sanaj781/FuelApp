@@ -17,7 +17,7 @@
             <tr>
                 <?php get_invoices();
                 $arr = array(1, 2, 3, 4);
-                $nr = 1;
+                $nr = 0;
                 foreach ($_SESSION['invoices'] as $value) {
                     $nr++;
                     echo '

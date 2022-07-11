@@ -20,6 +20,7 @@ include_once 'back-end/functions.php';
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="circle-percentage.css" />
 
+
   <title>FuelApp</title>
 </head>
 
