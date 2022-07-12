@@ -1,65 +1,96 @@
+<div id="myModal" class="modal col-12 ">
+
+    <!-- Modal content -->
+    <div class="modal-content text-center d-flex ">
+        <p class="g-0">Faktura została dodana</p>
+        <button id="close" type="button" class=" btn btn-success">OK</button>
+
+    </div>
+
+</div>
 <div class="row text-center ">
     <h5 class="pb-3">Rozpocznij Wyjazd</h5>
 </div>
 <div class="row" id="start-ride-wraper">
-    <form class="col-10">
-        <div class="form-group row">
-            <div class="form-check form-switch col-12">
-                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
-                <label class="form-check-label" for="flexSwitchCheckChecked">Jazda sluzbowa</label>
-            </div>
-            <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
-            <div class="col-sm-10">
-                <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
-            </div>
+    <form class="col-12" method="POST" action="<?php add_new_ride(); ?>">
+        <div class="form-check form-switch col-12 d-flex ">
+            <input class="form-check-input col-6" type="checkbox" role="switch" id="typeOfRide" name="typeOfRide" onchange="checkTypeOfRide()">
+            <label class="form-check-label col-6 ps-3" for="typeOfRide">Wyjazd Służbowy</label>
         </div>
-        <div class="form-group row">
-            <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
-            <div class="col-sm-10">
-                <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
-            </div>
-        </div>
-        <fieldset class="form-group">
-            <div class="row">
-                <legend class="col-form-label col-sm-2 pt-0">Radios</legend>
-                <div class="col-sm-10">
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-                        <label class="form-check-label" for="gridRadios1">
-                            First radio
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-                        <label class="form-check-label" for="gridRadios2">
-                            Second radio
-                        </label>
-                    </div>
-                    <div class="form-check disabled">
-                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3" disabled>
-                        <label class="form-check-label" for="gridRadios3">
-                            Third disabled radio
-                        </label>
+
+        <div id="delegation-wrapper" class="hidden">
+            <fieldset class="form-group mt-3">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="gridRadios" id="delegation" value="delegation" checked onchange="checkTypeOfDelegationRide()">
+                            <label class="form-check-label" for="delegation">
+                                Delegacja
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="gridRadios" id="administration" value="administration" onchange="checkTypeOfDelegationRide()">
+                            <label class="form-check-label" for="administration">
+                                Wyjazd Administracyjny
+                            </label>
+                        </div>
+
                     </div>
                 </div>
+            </fieldset>
+            <div class="col-12 mt-3 " id="delegationNr-wrapper">
+
+                <label class="form-check-label" for="delegationNr">
+                    Nr Delegacji:
+                </label>
+                <select class="form-select col-12" aria-label="Default select example" id="delegationNr" name="delegationNr">
+                    <option value="2343 - Gdynia">2343 - Gdynia</option>
+                    <option value="2345 - Wroclaw">2345 - Wroclaw</option>
+                    <option value="2343 - Mykanów">2343 - Mykanów</option>
+                </select>
             </div>
-        </fieldset>
-        <div class="form-group row">
-            <div class="col-sm-2">Checkbox</div>
-            <div class="col-sm-10">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="gridCheck1">
-                    <label class="form-check-label" for="gridCheck1">
-                        Example checkbox
-                    </label>
-                </div>
+            <div class="col-12 hidden" id="administration-wrapper">
+                <label for="administration-ride" class="col-sm-2 col-form-label"> Cel Wyjazdu Administracyjnego:</label>
+                <input type="text" class="form-control" id="administration_ride" name="administration_ride" placeholder="np. wyjazd do oddzialu w Modlinie">
             </div>
         </div>
-        <div class="form-group row">
-            <div class="col-sm-10">
-                <button type="submit" class="btn btn-primary">Sign in</button>
-            </div>
+        <div class="col-12">
+            <label for="distance" class="col-sm-2 col-form-label"> Planowany Dystans, km</label>
+            <input type="number" class="form-control" id="distance" name="distance" placeholder="np. 250km">
+        </div>
+
+
+
+
+
+
+
+        <div class="col-12 mt-4">
+            <button type="submit" class="btn btn-primary col-12">Dodaj Wyjazd</button>
+
         </div>
     </form>
 
 </div>
+<script type="text/javascript">
+    //Wyjazd słuzbowy czy prywatny
+    function checkTypeOfRide() {
+        if (document.getElementById('typeOfRide').checked) {
+            document.getElementById("delegation-wrapper").classList.remove('hidden');
+        } else {
+            document.getElementById("delegation-wrapper").classList.add('hidden');
+        }
+    }
+    //Delegacja czy wyjazd administracyjny
+    function checkTypeOfDelegationRide() {
+        if (document.getElementById('delegation').checked) {
+            document.getElementById("delegationNr-wrapper").classList.remove('hidden');
+            document.getElementById("administration-wrapper").classList.add('hidden');
+
+        } else if (document.getElementById('administration').checked) {
+            document.getElementById("administration-wrapper").classList.remove('hidden');
+
+            document.getElementById("delegationNr-wrapper").classList.add('hidden');
+        }
+    }
+</script>

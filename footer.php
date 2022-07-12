@@ -1,24 +1,18 @@
 <div class="d-flex text-center align-items-center" id="menu">
-    <a href="?page=start-ride" class="col-3 g-0">
+    <a href="?page=start-ride" class="col-4 g-0">
         <div class="" id="menu-item">
             <i class="bi bi-caret-right-fill"></i>
-            <div>Rozpocznij Wyjazd</div>
+            <div>Dodaj Podróż</div>
         </div>
     </a>
-    <a href="?page=add-document" class="col-3 g-0">
+    <a href="?page=add-document" class="col-4 g-0">
         <div class="" id="menu-item">
             <i class="bi bi-file-plus"></i>
             <div>Dodaj Fakturę</div>
         </div>
     </a>
-    <a href="?page=history" class="col-3 g-0">
 
-        <div class="" id="menu-item">
-            <i class="bi bi-card-list"></i>
-            <div>Moje Faktury</div>
-        </div>
-    </a>
-    <a href="?page=raport" class="col-3 g-0">
+    <a href="?page=raport" class="col-4 g-0">
         <div class="" id="menu-item-last">
             <i class="bi bi-receipt-cutoff"></i>
             <div>Raport</div>

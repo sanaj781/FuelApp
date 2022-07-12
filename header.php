@@ -1,5 +1,8 @@
 <?php
-session_start();
+// With ajax calls
+if (session_status() == 1) {
+  session_start();
+}
 include_once 'back-end/functions.php';
 ?>
 <!DOCTYPE html>
@@ -10,6 +13,7 @@ include_once 'back-end/functions.php';
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0  maximum-scale=1.0, user-scalable=no" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
   <!-- bootstrap libraries -->
   <!-- CSS only -->
@@ -31,7 +35,7 @@ include_once 'back-end/functions.php';
         <img id="drabpol-logo" src="imgs/DRABPOL-white2.b46e7a87b3dfaaba8c57.webp" alt="" />
       </div>
       <?php
-      if ($_SESSION['logedin'] === 1) {
+      if (isset($_SESSION['logedin']) && $_SESSION['logedin'] === 1) {
       ?>
         <div class="col-5 offset-4" id="user-info">
           <div class="row align-items-center">
@@ -46,6 +50,7 @@ include_once 'back-end/functions.php';
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                   <li><a class="dropdown-item" href="?page=choose-car">Zmień samochód</a></li>
+                  <li><a class="dropdown-item" href="?page=history">Moje Faktury</a></li>
                   <li><a class="dropdown-item" href="?page=logout">Wyloguj</a></li>
                 </ul>
               </div>
@@ -54,7 +59,7 @@ include_once 'back-end/functions.php';
         </div>
     </div>
 
-    <div class="row text-center py-5" id="your-car">
+    <div class="row text-center pt-5 pb-3" id="your-car">
       <h5 class="pb-1">Twój Samochód:
       </h5>
       <div class="col-12 pb-3">
@@ -63,7 +68,7 @@ include_once 'back-end/functions.php';
 
       <div class="row" id="car-description">
         <div class="col-4" id="car-brand"><?php echo $_SESSION['car_model'] ?></div>
-        <div class="col-4" id="car-mileage"><?php echo $_SESSION['car_oddometer'] ?></div>
+        <div class="col-4" id="car-mileage"><?php echo $_SESSION['car_oddometer'] . ' km' ?></div>
         <div class="col-4" id="car-plates"><?php echo $_SESSION['car_reg_nr'] ?></div>
       </div>
 

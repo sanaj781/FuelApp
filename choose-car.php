@@ -1,4 +1,4 @@
-    <h5 class="pb-1 text-center pb-1">Wybierz samochód:</h5>
+    <h5 class="pb-1 text-center ">Zmień samochód:</h5>
 
 
     <?php
