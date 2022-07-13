@@ -1,3 +1,13 @@
+<script type="text/javascript" src="js/js.js"></script>
+<script>
+    window.onload = function() {
+        setModal();
+        if (document.getElementById("isSent").value !== "success") {
+            getLocation();
+        }
+    }
+</script>
+
 <div id="myModal" class="modal col-12 ">
 
     <!-- Modal content -->
@@ -41,64 +51,3 @@
     </form>
 
 </div>
-
-<!-- Getting current location -->
-<script>
-    window.onload = getLocation();
-    const x = document.getElementById("position");
-
-    function getLocation() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition);
-        } else {
-            x.value = "Geolocation is not supported by this browser.";
-        }
-    }
-
-    function showPosition(position) {
-        x.value = position.coords.latitude +
-            " " + position.coords.longitude;
-    }
-</script>
-<!-- End of getting location -->
-<!-- Showing Modal -->
-<script>
-    window.onload = setModal();
-
-
-    function setModal() {
-        const y = document.getElementById("isSent");
-        if (y.value === 'success') {
-            // Get the modal
-            var modal = document.getElementById("myModal");
-
-
-            // Get the <span> element that closes the modal
-            var close = document.getElementById("close");
-
-
-            modal.style.display = "flex";
-            // setTimeout(function() {
-            //     location.href = "index.php?page=add-document"
-            // }, 5000);
-
-            // When the user clicks on <span> (x), close the modal
-            close.onclick = function() {
-                modal.style.display = "none";
-                location.href = "index.php?page=raport"
-
-            }
-
-            // When the user clicks anywhere outside of the modal, close it
-            window.onclick = function(event) {
-                if (event.target == modal) {
-                    modal.style.display = "none";
-                    location.href = "index.php?page=raport"
-
-                }
-            }
-        }
-
-    }
-</script>
-<!-- End of Showing Modal -->

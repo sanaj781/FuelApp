@@ -180,7 +180,7 @@ function add_new_ride()
                             )";
                 $result = @mysqli_query($conn, $query);
                 if ($result) {
-                    header("Location: index.php?page=add-document&status=success");
+                    header("Location: index.php?page=start-ride&status=success");
                 } else $_SESSION['error'] = mysqli_error($conn);
             }
             if (isset($_POST['gridRadios']) && $_POST['gridRadios'] == 'administration') {
@@ -200,7 +200,7 @@ function add_new_ride()
                             )";
                 $result = @mysqli_query($conn, $query);
                 if ($result) {
-                    header("Location: index.php?page=add-document&status=success");
+                    header("Location: index.php?page=start-ride&status=success");
                 } else $_SESSION['error'] = mysqli_error($conn);
             }
         }
@@ -219,7 +219,7 @@ function add_new_ride()
                             )";
             $result = @mysqli_query($conn, $query);
             if ($result) {
-                header("Location: index.php?page=add-document&status=success");
+                header("Location: index.php?page=start-ride&status=success");
             } else $_SESSION['error'] = mysqli_error($conn);
         }
     }

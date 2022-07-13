@@ -1,8 +1,14 @@
+<script type="text/javascript" src="js/js.js"></script>
+<script>
+    window.onload = function() {
+        setModal();
+    }
+</script>
 <div id="myModal" class="modal col-12 ">
 
     <!-- Modal content -->
     <div class="modal-content text-center d-flex ">
-        <p class="g-0">Faktura została dodana</p>
+        <p class="g-0">Zarejestrowałeś nowy wyjazd</p>
         <button id="close" type="button" class=" btn btn-success">OK</button>
 
     </div>
@@ -56,9 +62,10 @@
         </div>
         <div class="col-12">
             <label for="distance" class="col-sm-2 col-form-label"> Planowany Dystans, km</label>
-            <input type="number" class="form-control" id="distance" name="distance" placeholder="np. 250km">
+            <input type="number" class="form-control" id="distance" name="distance" placeholder="np. 250km" required>
         </div>
 
+        <input type="hidden" id="isSent" name="isSent" value="<?php if (isset($_GET['status'])) echo $_GET['status'] ?>">
 
 
 
@@ -72,25 +79,3 @@
     </form>
 
 </div>
-<script type="text/javascript">
-    //Wyjazd słuzbowy czy prywatny
-    function checkTypeOfRide() {
-        if (document.getElementById('typeOfRide').checked) {
-            document.getElementById("delegation-wrapper").classList.remove('hidden');
-        } else {
-            document.getElementById("delegation-wrapper").classList.add('hidden');
-        }
-    }
-    //Delegacja czy wyjazd administracyjny
-    function checkTypeOfDelegationRide() {
-        if (document.getElementById('delegation').checked) {
-            document.getElementById("delegationNr-wrapper").classList.remove('hidden');
-            document.getElementById("administration-wrapper").classList.add('hidden');
-
-        } else if (document.getElementById('administration').checked) {
-            document.getElementById("administration-wrapper").classList.remove('hidden');
-
-            document.getElementById("delegationNr-wrapper").classList.add('hidden');
-        }
-    }
-</script>
