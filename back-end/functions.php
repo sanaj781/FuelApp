@@ -1,52 +1,59 @@
 <?php
+function validate($data)
+{
+
+    $data = trim($data);
+
+    $data = stripslashes($data);
+
+    $data = htmlspecialchars($data);
+
+    return $data;
+}
+
 
 //User Auth Function
 function user_authentification()
 {
-    //Check input fields
-    if (isset($_POST['username']) && isset($_POST['password'])) {
+    if (isset($_POST['submit-login'])) {
+        //Check input fields
+        if (isset($_POST['username']) && isset($_POST['password'])) {
 
-        function validate($data)
-        {
 
-            $data = trim($data);
+            $username = validate($_POST['username']);
+            $password = validate($_POST['password']);
+            if (empty($username)) {
 
-            $data = stripslashes($data);
+                header("Location: index.php?error=User Name is required");
 
-            $data = htmlspecialchars($data);
+                exit();
+            } else if (empty($password)) {
 
-            return $data;
-        }
-        $username = validate($_POST['username']);
-        $password = validate($_POST['password']);
-        if (empty($username)) {
+                header("Location: index.php?error=Password is required");
 
-            header("Location: index.php?error=User Name is required");
-
-            exit();
-        } else if (empty($password)) {
-
-            header("Location: index.php?error=Password is required");
-
-            exit();
-        } else {
-            include 'db.php';
-            $select_user = mysqli_query($conn, "SELECT * FROM users WHERE login = '" . $username . "' AND password= '" . $password . "'");
-            $row = mysqli_fetch_assoc($select_user);
-            if (mysqli_num_rows($select_user)) {
-                $_SESSION['logedin'] = 1;
-                $_SESSION['name'] = $row['name'];
-                $_SESSION['username'] = $username;
-                //Cars for choosing for curent user
-                $_SESSION['cars'] = $row['car_ids'];
-                //Default car for curent user
-                $_SESSION['default_car'] = $row['default_car_id'];
-                //Calling a function to get 
-                get_default_car();
-                header("Location: index.php");
+                exit();
             } else {
-                header("Location: index.php?error=Wrong user or password");
+                include 'db.php';
+                $select_user = mysqli_query($conn, "SELECT * FROM users WHERE login = '" . $username . "' AND password= '" . $password . "'");
+                $row = mysqli_fetch_assoc($select_user);
+                if (mysqli_num_rows($select_user)) {
+                    $_SESSION['userinfo'] = $_SERVER['HTTP_USER_AGENT'];
+                    $_SESSION['logedin'] = 1;
+                    $_SESSION['name'] = $row['name'];
+                    $_SESSION['username'] = $username;
+                    //Cars for choosing for curent user
+                    $_SESSION['cars'] = $row['car_ids'];
+                    //Default car for curent user
+                    $_SESSION['default_car'] = $row['default_car_id'];
+                    //Calling a function to get 
+                    get_default_car();
+                    header("Location: index.php");
+                } else {
+                    header("Location: index.php?error=Wrong user or password");
+                }
             }
+        } else {
+            header("Location: index.php?error=Login or password is empty");
         }
     }
 }
@@ -105,8 +112,8 @@ function add_invoice()
             $errors[] = "extension not allowed, please choose a JPEG or PNG file.";
         }
 
-        if ($file_size > 2097152) {
-            $errors[] = 'File size must be excately 2 MB';
+        if ($file_size >= 20971520 || $file_size == 0) {
+            $errors[] = 'File size must be less than 20 MB';
         }
 
         if (empty($errors) == true) {
@@ -120,10 +127,10 @@ function add_invoice()
                             '" . $file_name . "',
                             '" . $_SESSION['username'] . "',
                             '" . $date . "',
-                            '" . $_POST['oddometer'] . "',
-                            '" . $_POST['amount'] . "',
-                            '" . $_POST['position'] . "',
-                            '" . $_SESSION['car_reg_nr'] . "'
+                            '" . validate($_POST['oddometer']) . "',
+                            '" . validate($_POST['amount']) . "',
+                            '" . validate($_POST['position']) . "',
+                            '" . validate($_SESSION['car_reg_nr']) . "'
 
                             )";
             $result = @mysqli_query($conn, $query);
@@ -131,6 +138,8 @@ function add_invoice()
                 header("Location: index.php?page=add-document&status=success");
             } else header("Location: index.php?page=add-document&status=error");
         } else {
+            header("Location: index.php?page=add-document&status=error&error=" . $errors[0] . "");
+
             echo $errors[0];
         }
     }
@@ -171,10 +180,10 @@ function add_new_ride()
                 $query = "INSERT INTO business_trips (user, business_or_private, delegation_or_administration, distance, delegation_nr, car, date)
                             VALUES(
                             '" . $_SESSION['username'] . "',
-                            '" . $_POST['typeOfRide'] . "',
-                            '" . $_POST['gridRadios'] . "',
-                            '" . $_POST['distance'] . "',
-                            '" . $_POST['delegationNr'] . "',
+                            '" . validate($_POST['typeOfRide']) . "',
+                            '" . validate($_POST['gridRadios']) . "',
+                            '" . validate($_POST['distance']) . "',
+                            '" . validate($_POST['delegationNr']) . "',
                             '" . $_SESSION['default_car'] . "',
                             '" . $date . "'
                             )";
@@ -191,10 +200,10 @@ function add_new_ride()
                 $query = "INSERT INTO business_trips (user, business_or_private, delegation_or_administration, distance, additional_info, car, date)
                             VALUES(
                             '" . $_SESSION['username'] . "',
-                            '" . $_POST['typeOfRide'] . "',
-                            '" . $_POST['gridRadios'] . "',
-                            '" . $_POST['distance'] . "',
-                            '" . $_POST['administration_ride'] . "',
+                            '" . validate($_POST['typeOfRide']) . "',
+                            '" . validate($_POST['gridRadios']) . "',
+                            '" . validate($_POST['distance']) . "',
+                            '" . validate($_POST['administration_ride']) . "',
                             '" . $_SESSION['default_car'] . "',
                             '" . $date . "'
                             )";
@@ -213,7 +222,7 @@ function add_new_ride()
             $query = "INSERT INTO private_trips (user, distance, car, date)
                             VALUES(
                             '" . $_SESSION['username'] . "',
-                            '" . $_POST['distance'] . "',
+                            '" . validate($_POST['distance']) . "',
                             '" . $_SESSION['default_car'] . "',
                             '" . $date . "'
                             )";

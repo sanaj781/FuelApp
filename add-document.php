@@ -12,7 +12,10 @@
 
     <!-- Modal content -->
     <div class="modal-content text-center d-flex ">
-        <p class="g-0">Faktura została dodana</p>
+        <p class="g-0"><?php if (empty($_GET['error'])) echo 'Faktura została dodana';
+                        else print_r($_GET['error']); ?>
+
+        </p>
         <button id="close" type="button" class=" btn btn-success">OK</button>
 
     </div>
@@ -45,7 +48,7 @@
         <input type="hidden" id="position" name="position">
         <input type="hidden" id="isSent" name="isSent" value="<?php if (isset($_GET['status'])) echo $_GET['status'] ?>">
         <div class="col-12">
-            <input type="submit" value="Upload Image" name="submit" class="col-12 btn btn-primary mb-3">
+            <input type="submit" value="Upload Image" name="submit" class="col-12 btn btn-primary ">
         </div>
 
     </form>

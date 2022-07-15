@@ -1,15 +1,23 @@
+h5 {
+  font-size: 1.5em;
+}
 a {
   text-decoration: none !important;
   color: unset;
 }
+body {
+  color: #232d4f;
+}
 #header {
-  height: 50px;
+  height: 55px;
   position: fixed;
   left: 0;
   right: 0;
   top: 0;
-  font-size: 0.7em;
   background-color: #232d4f;
+  color: whitesmoke;
+}
+#username {
   color: whitesmoke;
 }
 #drabpol-logo {
@@ -27,22 +35,32 @@ a {
 #your-car {
   margin-top: 30px;
 }
+
 #change-car {
 }
 #menu {
+  padding: 5px 0;
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
   width: 100%;
-  height: 50px;
+  height: 55px;
   font-size: 0.7em;
   background-color: #232d4f;
   color: whitesmoke;
 }
-#menu-item {
-  border-right: 1px solid whitesmoke;
+.active {
+  background-color: #304486;
 }
+#menu i {
+  font-size: 2.3em;
+}
+
+#menu-item {
+  /* border-right: 1px solid whitesmoke; */
+}
+#choose-car-wraper,
 #raport-wraper,
 #add-doc-wraper,
 #history-wraper,
@@ -53,7 +71,7 @@ a {
   height: 100vh;
 }
 #choose-car {
-  font-size: 0.5em;
+  font-size: 0.7em;
   height: 50px;
   border-bottom: 1px solid whitesmoke;
   border-top: 1px solid whitesmoke;
@@ -98,4 +116,21 @@ a {
   color: #000;
   text-decoration: none;
   cursor: pointer;
+}
+#alert-mobile-only {
+  display: none;
+}
+@media screen and (min-width: 913px) {
+  .container {
+    display: none;
+  }
+  #alert-mobile-only {
+    display: block;
+    color: black;
+  }
+}
+@media screen and (max-width: 340px) {
+  #username {
+    display: none;
+  }
 }

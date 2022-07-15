@@ -1,5 +1,6 @@
-    <h5 class="pb-1 text-center ">Zmień samochód:</h5>
+<div id="choose-car-wraper">
 
+    <h5 class="pb-3 text-center ">Wybierz samochód</h5>
 
     <?php
     change_default_car();
@@ -11,22 +12,24 @@
         $row = mysqli_fetch_assoc($select_available_cars);
         if (mysqli_num_rows($select_available_cars)) {
             echo '
-            <div class="row text-center align-items-center justify-content-center" id="choose-car">
-
-            <div class="row align-items-center">
-                <div class="col-3">
-                <img id="car-img" src="imgs/' . $row['car_img'] . '" alt="" />
-    </div>
-        <div class="col-3" id="car-brand">' . $row['car_model'] . '</div>
-        <div class="col-3" id="car-plates">' . $row['registration_nr'] . '</div>
+            <a href="?page=choose-car&car=' . $row['id'] . '" >
+            <div class=" my-2 row text-center align-items-center justify-content-center" >
+                <div class="d-flex align-items-center">
+                    <div class="col-4">
+                    <img class="" id="car-img" src="imgs/' . $row['car_img'] . '" alt="" />
+                 </div>
+                    <div class="col-4" id="car-brand">' . $row['car_model'] . '</div>
+                    <div class="col-4" id="car-plates">' . $row['registration_nr'] . '</div>
        
 
-        <div class="col-3" id="car-plates"> <a href="?page=choose-car&car=' . $row['id'] . '" class="btn btn-primary">Wybierz</a></div>
+                    <div class="col-4" id="car-plates"></div>
 
-        </div>
-    </div>
+            </div>
+            </div>
+            </a> 
 
 ';
         }
     }
     ?>
+</div>
