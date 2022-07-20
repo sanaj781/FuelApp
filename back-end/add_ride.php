@@ -24,7 +24,7 @@ if (!empty($_POST)) {
         )";
             $result = @mysqli_query($conn, $query);
             if ($result) {
-                header("Location: index.php?page=modal&status=success");
+                header("Location:../index.php?page=start-ride&status=success");
             } else $_SESSION['error'] = mysqli_error($conn);
         }
         if (isset($_POST['gridRadios']) && $_POST['gridRadios'] == 'administration') {
@@ -47,7 +47,8 @@ if (!empty($_POST)) {
                 header("Location: ../index.php?page=start-ride&status=success");
             } else $_SESSION['error'] = mysqli_error($conn);
         }
-    } else {
+    }
+    if ($_POST['typeOfRide'] !== 'on') {
         include 'db.php';
 
         date_default_timezone_set('Europe/Warsaw');
