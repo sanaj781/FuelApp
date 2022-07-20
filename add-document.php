@@ -1,13 +1,3 @@
-<script type="text/javascript" src="js/js.js"></script>
-<script>
-    window.onload = function() {
-        setModal();
-        if (document.getElementById("isSent").value !== "success") {
-            getLocation();
-        }
-    }
-</script>
-
 <div id="myModal" class="modal col-12 ">
 
     <!-- Modal content -->
@@ -24,7 +14,7 @@
 
 <div id="add-doc-wraper">
     <h5 class="text-center pb-4">Dodaj Nową Fakturę</h5>
-    <form id="add-invoice" class="row g-3" method="post" action="<?php add_invoice(); ?>" enctype="multipart/form-data">
+    <form id="add-invoice" class="row g-3" method="post" action="back-end/add_invoice.php" enctype="multipart/form-data">
 
         <div class="col-6">
             <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="Przebieg">
@@ -48,9 +38,12 @@
         <input type="hidden" id="position" name="position">
         <input type="hidden" id="isSent" name="isSent" value="<?php if (isset($_GET['status'])) echo $_GET['status'] ?>">
         <div class="col-12">
-            <input type="submit" value="Upload Image" name="submit" class="col-12 btn btn-primary ">
+            <input type="submit" value="Upload Image" name="add_document" class="col-12 btn btn-primary ">
         </div>
 
     </form>
 
 </div>
+<script>
+    getLocation();
+</script>

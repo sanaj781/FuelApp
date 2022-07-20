@@ -10,15 +10,18 @@ body {
 }
 #header {
   height: 55px;
+  z-index: 999;
   position: fixed;
   left: 0;
   right: 0;
   top: 0;
-  background-color: #232d4f;
-  color: whitesmoke;
+  /* background-color: #232d4f; */
+  background-color: white;
+  color: #232d4f;
+  border-bottom: 0.5px solid gray;
 }
 #username {
-  color: whitesmoke;
+  color: #232d4f;
 }
 #drabpol-logo {
   height: 40px;
@@ -26,14 +29,17 @@ body {
 }
 #avatar {
   border-radius: 100%;
-  border: 1px solid white;
   width: 36px;
 }
-#car-img {
+#img-car {
   width: 100%;
+}
+.img-car {
+  max-height: 115px;
 }
 #your-car {
   margin-top: 30px;
+  margin-bottom: 60px;
 }
 
 #change-car {
@@ -47,11 +53,13 @@ body {
   width: 100%;
   height: 55px;
   font-size: 0.7em;
-  background-color: #232d4f;
-  color: whitesmoke;
+  /* background-color: #232d4f; */
+  background-color: white;
+  color: #232d4f;
+  border-top: 0.5px solid gray;
 }
-.active {
-  background-color: #304486;
+.active_menu {
+  border-top: 2px solid #232d4f;
 }
 #menu i {
   font-size: 2.3em;
@@ -84,7 +92,7 @@ body {
 .modal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  z-index: 10000; /* Sit on top */
   left: 0;
   top: 0;
   width: 100%; /* Full width */
@@ -133,4 +141,33 @@ body {
   #username {
     display: none;
   }
+}
+
+.carousel-control-next,
+.carousel-control-prev {
+  position: absolute;
+  height: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 15%;
+  padding: 0;
+  color: #fff;
+  text-align: center;
+  background: 0 0;
+  border: 0;
+  opacity: 0.5;
+  transition: opacity 0.15s ease;
+}
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: #232d4f;
+  opacity: 40%;
+}
+
+h5 {
+  font-size: 1.25em !important;
+}
+.SubmitCarButton {
+  min-height: 50px !important;
 }

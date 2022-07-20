@@ -5,6 +5,7 @@ if (
   && isset($_SESSION['car_reg_nr']) && $_SESSION['userinfo'] === $_SERVER['HTTP_USER_AGENT']
 ) {
   include 'raport.php';
+  include 'footer.php';
 }
 //If user is not loged in show the login page
 else {

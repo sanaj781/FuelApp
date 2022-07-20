@@ -1,4 +1,5 @@
 <?php
+
 function validate($data)
 {
 
@@ -10,8 +11,6 @@ function validate($data)
 
     return $data;
 }
-
-
 //User Auth Function
 function user_authentification()
 {
@@ -47,6 +46,8 @@ function user_authentification()
                     $_SESSION['default_car'] = $row['default_car_id'];
                     //Calling a function to get 
                     get_default_car();
+                    get_all_cars();
+
                     header("Location: index.php");
                 } else {
                     header("Location: index.php?error=Wrong user or password");
@@ -70,6 +71,10 @@ function get_default_car()
         $_SESSION['car_oddometer'] = $row['oddometer'];
         $_SESSION['car_model'] = $row['car_model'];
         $_SESSION['car_img'] = $row['car_img'];
+        if (isset($_GET['page']) && !empty($_GET['page'])) {
+            $page = $_GET['page'];
+        } else $page = 'raport';
+        header("Location: index.php?page=" . $page);
     } else {
         header("Location: index.php?error=Wrong user or password");
     }
@@ -86,7 +91,6 @@ function change_default_car()
         if (mysqli_query($conn, $change_car)) {
             $_SESSION['default_car'] = $_GET['car'];
             get_default_car();
-            header("Location: index.php?page=choose-car");
         } else {
             echo "Error updating record: " . mysqli_error($conn);
         }
@@ -164,7 +168,27 @@ function get_invoices()
 }
 // End Of Function for getting history of invoices
 
-//Function for adding new trip/ride to a database
+
+
+function get_all_cars()
+{
+    include 'back-end/db.php';
+    $cars = explode(",", $_SESSION['cars']);
+    foreach ($cars as $value) {
+        $select_available_cars = mysqli_query($conn, "SELECT * FROM cars WHERE id = '" . $value . "'");
+
+        $row = mysqli_fetch_assoc($select_available_cars);
+        if (mysqli_num_rows($select_available_cars)) {
+            $_SESSION['arrayOfcars']['id'][] = $row['id'];
+            $_SESSION['arrayOfcars']['reg_nr'][] = $row['registration_nr'];
+            $_SESSION['arrayOfcars']['oddometer'][] = $row['oddometer'];
+            $_SESSION['arrayOfcars']['car_model'][] = $row['car_model'];
+            $_SESSION['arrayOfcars']['car_img'][] = $row['car_img'];
+        }
+    }
+}
+
+
 function add_new_ride()
 {
     if (!empty($_POST)) {
@@ -178,15 +202,15 @@ function add_new_ride()
                 date_default_timezone_set('Europe/Warsaw');
                 $date = date('Y-m-d H:i:s');
                 $query = "INSERT INTO business_trips (user, business_or_private, delegation_or_administration, distance, delegation_nr, car, date)
-                            VALUES(
-                            '" . $_SESSION['username'] . "',
-                            '" . validate($_POST['typeOfRide']) . "',
-                            '" . validate($_POST['gridRadios']) . "',
-                            '" . validate($_POST['distance']) . "',
-                            '" . validate($_POST['delegationNr']) . "',
-                            '" . $_SESSION['default_car'] . "',
-                            '" . $date . "'
-                            )";
+                    VALUES(
+        '" . $_SESSION['username'] . "',
+        '" . validate($_POST['typeOfRide']) . "',
+        '" . validate($_POST['gridRadios']) . "',
+        '" . validate($_POST['distance']) . "',
+        '" . validate($_POST['delegationNr']) . "',
+        '" . $_SESSION['default_car'] . "',
+        '" . $date . "'
+        )";
                 $result = @mysqli_query($conn, $query);
                 if ($result) {
                     header("Location: index.php?page=start-ride&status=success");
@@ -198,37 +222,35 @@ function add_new_ride()
                 date_default_timezone_set('Europe/Warsaw');
                 $date = date('Y-m-d H:i:s');
                 $query = "INSERT INTO business_trips (user, business_or_private, delegation_or_administration, distance, additional_info, car, date)
-                            VALUES(
-                            '" . $_SESSION['username'] . "',
-                            '" . validate($_POST['typeOfRide']) . "',
-                            '" . validate($_POST['gridRadios']) . "',
-                            '" . validate($_POST['distance']) . "',
-                            '" . validate($_POST['administration_ride']) . "',
-                            '" . $_SESSION['default_car'] . "',
-                            '" . $date . "'
-                            )";
+        VALUES(
+        '" . $_SESSION['username'] . "',
+        '" . validate($_POST['typeOfRide']) . "',
+        '" . validate($_POST['gridRadios']) . "',
+        '" . validate($_POST['distance']) . "',
+        '" . validate($_POST['administration_ride']) . "',
+        '" . $_SESSION['default_car'] . "',
+        '" . $date . "'
+        )";
                 $result = @mysqli_query($conn, $query);
                 if ($result) {
-                    header("Location: index.php?page=start-ride&status=success");
+                    header("Location: ../index.php?page=start-ride&status=success");
                 } else $_SESSION['error'] = mysqli_error($conn);
             }
-        }
-
-        if ($_POST['typeOfRide'] !== 'on') {
+        } else {
             include 'db.php';
 
             date_default_timezone_set('Europe/Warsaw');
             $date = date('Y-m-d H:i:s');
             $query = "INSERT INTO private_trips (user, distance, car, date)
-                            VALUES(
-                            '" . $_SESSION['username'] . "',
-                            '" . validate($_POST['distance']) . "',
-                            '" . $_SESSION['default_car'] . "',
-                            '" . $date . "'
-                            )";
+        VALUES(
+        '" . $_SESSION['username'] . "',
+        '" . validate($_POST['distance']) . "',
+        '" . $_SESSION['default_car'] . "',
+        '" . $date . "'
+        )";
             $result = @mysqli_query($conn, $query);
             if ($result) {
-                header("Location: index.php?page=start-ride&status=success");
+                header("Location:../index.php?page=start-ride&status=success");
             } else $_SESSION['error'] = mysqli_error($conn);
         }
     }

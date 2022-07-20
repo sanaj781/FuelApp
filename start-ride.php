@@ -1,9 +1,3 @@
-<script type="text/javascript" src="js/js.js"></script>
-<script>
-    window.onload = function() {
-        setModal();
-    }
-</script>
 <div id="myModal" class="modal col-12 ">
 
     <!-- Modal content -->
@@ -18,7 +12,7 @@
     <h5 class="pb-3">Rozpocznij Wyjazd</h5>
 </div>
 <div class="row" id="start-ride-wraper">
-    <form class="col-12" method="POST" action="<?php add_new_ride(); ?>">
+    <form class="col-12" method="POST" action="back-end/add_ride.php">
         <div class="form-check form-switch col-12 d-flex ">
             <input class="form-check-input col-6" type="checkbox" role="switch" id="typeOfRide" name="typeOfRide" onchange="checkTypeOfRide()">
             <label class="form-check-label col-6 ps-3" for="typeOfRide">Wyjazd Służbowy</label>
