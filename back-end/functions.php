@@ -44,9 +44,13 @@ function user_authentification()
                     $_SESSION['cars'] = $row['car_ids'];
                     //Default car for curent user
                     $_SESSION['default_car'] = $row['default_car_id'];
+                    if (!empty($row['budget'])) {
+                        $_SESSION['budget'] = $row['budget'];
+                    } else $_SESSION['budget'] = 0;
                     //Calling a function to get 
-                    get_default_car();
                     get_all_cars();
+                    get_default_car();
+                    calculate_budget();
 
                     header("Location: index.php");
                 } else {
@@ -72,11 +76,11 @@ function get_default_car()
         $_SESSION['car_model'] = $row['car_model'];
         $_SESSION['car_img'] = $row['car_img'];
         if (isset($_GET['page']) && !empty($_GET['page'])) {
-            $page = $_GET['page'];
+            $page = validate($_GET['page']);
         } else $page = 'raport';
         header("Location: index.php?page=" . $page);
     } else {
-        header("Location: index.php?error=Wrong user or password");
+        header("Location: index.php?error=Default car was not found");
     }
 }
 //End of Function for getting default car parameters for curent user
@@ -86,13 +90,19 @@ function change_default_car()
 {
 
     if (isset($_GET['car'])) {
-        include 'db.php';
-        $change_car = "UPDATE users SET default_car_id='" . $_GET['car'] . "' WHERE login='" . $_SESSION['username'] . "'";
-        if (mysqli_query($conn, $change_car)) {
-            $_SESSION['default_car'] = $_GET['car'];
-            get_default_car();
+        if (in_array(validate($_GET['car']), $_SESSION['arrayOfcars']['id'])) {
+
+            include 'db.php';
+            $change_car = "UPDATE users SET default_car_id='" . validate($_GET['car']) . "' WHERE login='" . $_SESSION['username'] . "'";
+            if (mysqli_query($conn, $change_car)) {
+                $_SESSION['default_car'] = $_GET['car'];
+                get_default_car();
+            } else {
+                echo "Error updating record: " . mysqli_error($conn);
+            }
         } else {
-            echo "Error updating record: " . mysqli_error($conn);
+            echo 'You are not allowed to choose this car';
+            header("Location: index.php?page=raport&error=You are not allowed to choose this car");
         }
     }
 }
@@ -117,6 +127,37 @@ function get_invoices()
 }
 // End Of Function for getting history of invoices
 
+//Function for getting history of trips
+function get_trips()
+{
+    require 'db.php';
+    $trips = [];
+    $sql = "SELECT * FROM business_trips WHERE user = '" . $_SESSION['username'] . "'";
+    $result = mysqli_query($conn, $sql);
+    $resultCheck = mysqli_num_rows($result);
+
+    if ($resultCheck > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $trips[] = $row;
+        }
+    }
+    $_SESSION['trips'] = $trips;
+
+    $private_trips = [];
+    $sql = "SELECT * FROM private_trips WHERE user = '" . $_SESSION['username'] . "'";
+    $result = mysqli_query($conn, $sql);
+    $resultCheck = mysqli_num_rows($result);
+
+    if ($resultCheck > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $private_trips[] = $row;
+        }
+    }
+    $_SESSION['private_trips'] = $private_trips;
+}
+// End Of Function for getting history of trips
+
+
 
 
 function get_all_cars()
@@ -134,5 +175,53 @@ function get_all_cars()
             $_SESSION['arrayOfcars']['car_model'][] = $row['car_model'];
             $_SESSION['arrayOfcars']['car_img'][] = $row['car_img'];
         }
+    }
+}
+
+function calculate_budget()
+{
+    $_SESSION['invoices_current_month_distance'] = [];
+    $_SESSION['invoices_current_month_expenses'] = [];
+    $_SESSION['private_current_month_distance'] = [];
+    unset($_SESSION['invoices']);
+    unset($_SESSION['trips']);
+    unset($_SESSION['private_trips']);
+    get_invoices();
+    get_trips();
+    foreach ($_SESSION['invoices'] as $value) {
+
+        if (date("Y/m/", strtotime($value['date'])) >= date("Y/m/")) {
+
+            $_SESSION['invoices_current_month_expenses'][] = $value['amount'];
+        }
+    }
+
+    foreach ($_SESSION['trips'] as $value) {
+
+        if (date("Y/m/", strtotime($value['date'])) >= date("Y/m/")) {
+            $_SESSION['invoices_current_month_distance'][] = $value['distance'];
+        }
+    }
+
+    foreach ($_SESSION['private_trips'] as $value) {
+
+        if (date("Y/m/", strtotime($value['date'])) >= date("Y/m/")) {
+            $_SESSION['private_current_month_distance'][] = $value['distance'];
+            $_SESSION['invoices_current_month_distance'][] = $value['distance'];
+        }
+    }
+    if (!empty($_SESSION['invoices_current_month_expenses'])) {
+        $_SESSION['current_expences'] = array_sum($_SESSION['invoices_current_month_expenses']);
+    } else $_SESSION['current_expences'] = 0;
+    if (!empty($_SESSION['invoices_current_month_distance'])) {
+        $_SESSION['current_distance'] = array_sum($_SESSION['invoices_current_month_distance']);
+    } else $_SESSION['current_distance'] = 0;
+    if (!empty($_SESSION['private_current_month_distance'])) {
+        $_SESSION['current_private_distance'] = array_sum($_SESSION['private_current_month_distance']);
+    } else $_SESSION['current_private_distance'] = 0;
+    if (!empty($_SESSION['current_expences']) && $_SESSION['current_expences'] < $_SESSION['budget']) {
+        $_SESSION['percentage'] = round(100 - $_SESSION['current_expences'] / $_SESSION['budget'] * 100);
+    } else {
+        $_SESSION['percentage'] = 0;
     }
 }

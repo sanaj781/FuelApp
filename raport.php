@@ -8,10 +8,11 @@
     ?>
   </div>
   <div class="col-7">
-    <div class="pb-2" id="planned-budget">Planowany budżet: 1500 zl</div>
-    <div class="pb-2" id="planned-budget">Pozostalo: 750 zl</div>
-    <div class="pb-2" id="planned-budget">Przebieg: 1300 km</div>
-    <div class="pb-2" id="planned-budget">Zużyto paliwa: 70L</div>
-    <div class="pb-2" id="planned-budget">Dystans: 700 km</div>
+    <div class="pb-2" id="planned-budget">Planowany budżet: <?php echo $_SESSION['budget']; ?> zl</div>
+    <div class="pb-2" id="planned-budget">Wydatki: <?php echo $_SESSION['current_expences']; ?> zl</div>
+    <div class="pb-2" id="planned-budget">Pozostalo: <?php echo $_SESSION['budget'] - $_SESSION['current_expences']; ?> zl</div>
+    <div class="pb-2" id="planned-budget">Przebieg: <?php echo $_SESSION['current_distance']; ?> km</div>
+    <div class="pb-2" id="planned-budget">Przebieg Prywatny: <?php echo $_SESSION['current_private_distance']; ?> km</div>
+    <div class="pb-2" id="planned-budget">Zużyto paliwa: <?php echo round($_SESSION['current_distance'] * 0.1); ?> L</div>
   </div>
 </div>

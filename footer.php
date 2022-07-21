@@ -22,7 +22,7 @@
     <?php if (!isset($_GET['page']) || $_GET['page'] === 'raport') echo 'active_menu'
     ?>
     col-4 g-0">
-            <div class="" id="menu-item-last ">
+            <div class="" id="menu-item-last">
                 <i class="bi bi-receipt-cutoff"></i>
                 <div>Raport</div>
             </div>

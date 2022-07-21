@@ -2,7 +2,10 @@
 
     <!-- Modal content -->
     <div class="modal-content text-center d-flex ">
-        <p class="g-0">Zarejestrowałeś nowy wyjazd</p>
+        <p class="g-0"><?php if (empty($_GET['error'])) echo 'Zarejestrowałeś nowy wyjazd';
+                        else print_r($_GET['error']); ?>
+
+        </p>
         <button id="close" type="button" class=" btn btn-success">OK</button>
 
     </div>
@@ -67,7 +70,7 @@
 
 
         <div class="col-12 mt-4">
-            <button type="submit" class="btn btn-primary col-12">Dodaj Wyjazd</button>
+            <button type="submit" name="add_ride" class="btn btn-primary col-12">Dodaj Wyjazd</button>
 
         </div>
     </form>

@@ -22,6 +22,9 @@ function setModal() {
       document.getElementById("isSent").value === "success" ||
       document.getElementById("isSent").value === "error"
     ) {
+      let currentPage = window.location.toString().includes("start-ride")
+        ? "start-ride"
+        : "add-document";
       // Get the modal
       var modal = document.getElementById("myModal");
 
@@ -33,14 +36,15 @@ function setModal() {
       // When the user clicks on <span> (x), close the modal and redirect to the main page
       close.onclick = function () {
         modal.style.display = "none";
-        // location.href = "index.php?page=raport";
+
+        location.href = "index.php?page=" + currentPage;
       };
 
       // When the user clicks anywhere outside of the modal, close it and redirect to main page
       window.onclick = function (event) {
         if (event.target == modal) {
           modal.style.display = "none";
-          // location.href = "index.php?page=raport";
+          location.href = "index.php?page=" + currentPage;
         }
       };
     }

@@ -64,7 +64,7 @@ include 'back-end/functions.php';
                 <img class="" id="avatar" src="imgs/avatar-<?php echo $_SESSION['username']; ?>.jpg" alt="" />
               </a>
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <li><a class="dropdown-item" href="?page=choose-car">Moje Wyjazdy</a></li>
+                <li><a class="dropdown-item" href="?page=trips-history">Moje Wyjazdy</a></li>
                 <li><a class="dropdown-item" href="?page=invoice-history">Moje Faktury</a></li>
                 <li><a class="dropdown-item" href="?page=logout">Wyloguj</a></li>
               </ul>

@@ -58,6 +58,10 @@ body {
   color: #232d4f;
   border-top: 0.5px solid gray;
 }
+#menu #menu-item,
+#menu-item-last:hover {
+  color: #232d4f;
+}
 .active_menu {
   border-top: 2px solid #232d4f;
 }
@@ -170,4 +174,10 @@ h5 {
 }
 .SubmitCarButton {
   min-height: 50px !important;
+}
+table tr td {
+  font-size: 0.9em !important;
+}
+.bi-file-arrow-down-fill {
+  font-size: 1.5em;
 }
