@@ -77,42 +77,26 @@ function checkTypeOfDelegationRide() {
   }
 }
 
-//Swiping Car Function
-function SwipeCar(arg) {
-  const myCarousel = document.getElementById("carouselExampleControls");
-  location.href;
-  myCarousel.addEventListener("slide.bs.carousel", (event) => {
-    document.getElementsByClassName("carousel-item");
-    if (event.direction === "left") changeCar("next");
-    if (event.direction === "right") changeCar("prev");
-  });
-
-  //Sliding cars
-  function changeCar(arg) {
-    const SubmitCarButton = document.getElementById("SubmitCarButton");
-    const arrayOfCars = document.getElementById("car_ids").value.split(",");
-    let currentCarId =
-      document.getElementsByClassName("active")[0].lastElementChild.value;
-    let currentCarRegNr =
-      document.getElementsByClassName("active")[0].children[
-        document.getElementsByClassName("active")[0].children.length - 2
-      ].value;
-    let index = arrayOfCars.indexOf(currentCarId);
-    swipe(arg);
-
-    function swipe(arg) {
-      const carhref = window.location.toString().includes("?page=")
-        ? "&car="
-        : "?car=";
-      SubmitCarButton.classList.remove("hidden");
-      SubmitCarButton.setAttribute(
-        "href",
-        window.location + carhref + currentCarId
-      );
-      SubmitCarButton.textContent = "Wybierz " + currentCarRegNr;
-    }
-  }
+//Sliding cars
+function changeCar() {
+  const SubmitCarButton = document.getElementById("SubmitCarButton");
+  let currentCarId =
+    document.getElementsByClassName("active")[0].lastElementChild.value;
+  let currentCarRegNr =
+    document.getElementsByClassName("active")[0].children[
+      document.getElementsByClassName("active")[0].children.length - 2
+    ].value;
+  const carhref = window.location.toString().includes("?page=")
+    ? "&car="
+    : "?car=";
+  SubmitCarButton.setAttribute(
+    "href",
+    window.location + carhref + currentCarId
+  );
+  SubmitCarButton.textContent = "Wybierz " + currentCarRegNr;
+  SubmitCarButton.classList.remove("hidden");
 }
+
 function Fileloader() {
   function showLoading() {
     document.getElementById("loading_gif").style = "visibility: visible";

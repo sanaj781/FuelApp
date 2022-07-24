@@ -45,7 +45,6 @@
 
 
         window.onload = function() {
-            SwipeCar();
             setModal();
 
         }

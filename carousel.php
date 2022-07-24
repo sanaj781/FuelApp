@@ -23,12 +23,19 @@
         <?php } ?>
         <input type="hidden" id="car_ids" value="<?php implode(" ,", $cars) ?>">
     </div>
-    <a class=" carousel-control-prev" data-bs-target="#carouselExampleControls" data-bs-slide="prev" onclick="SwipeCar()">
+    <a class=" carousel-control-prev" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span>
     </a>
-    <a class="carousel-control-next" data-bs-target="#carouselExampleControls" data-bs-slide="next" onclick="SwipeCar()">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <a class="carousel-control-next" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+        <span class=" carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
     </a>
 </div>
+<script>
+    const myCarousel = document.getElementById("carouselExampleControls");
+    myCarousel.addEventListener("slid.bs.carousel", (event) => {
+        document.getElementsByClassName("carousel-item");
+        if (event.direction === "left" || event.direction === "right") changeCar();
+    });
+</script>

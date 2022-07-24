@@ -56,13 +56,15 @@ body {
   /* background-color: #232d4f; */
   background-color: white;
   color: #232d4f;
-  /* border-top: 0.5px solid gray; */
 }
 #menu #menu-item,
 #menu-item-last:hover {
   color: #232d4f;
 }
-.active_menu {
+#menu a {
+  border-top: 0.5px solid gray;
+}
+#menu .active_menu {
   border-top: 2px solid #232d4f;
 }
 #menu i {
@@ -160,7 +162,7 @@ body {
   text-align: center;
   background: 0 0;
   border: 0;
-  opacity: 0.5;
+  opacity: 0.25;
   transition: opacity 0.15s ease;
 }
 .carousel-control-prev-icon,
