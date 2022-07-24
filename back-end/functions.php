@@ -221,6 +221,8 @@ function calculate_budget()
     } else $_SESSION['current_private_distance'] = 0;
     if (!empty($_SESSION['current_expences']) && $_SESSION['current_expences'] < $_SESSION['budget']) {
         $_SESSION['percentage'] = round(100 - $_SESSION['current_expences'] / $_SESSION['budget'] * 100);
+    } else if (empty($_SESSION['current_expences'])) {
+        $_SESSION['percentage'] = 100;
     } else {
         $_SESSION['percentage'] = 0;
     }

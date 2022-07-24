@@ -81,7 +81,7 @@ function checkTypeOfDelegationRide() {
 function SwipeCar(arg) {
   const myCarousel = document.getElementById("carouselExampleControls");
   location.href;
-  myCarousel.addEventListener("slid.bs.carousel", (event) => {
+  myCarousel.addEventListener("slide.bs.carousel", (event) => {
     document.getElementsByClassName("carousel-item");
     if (event.direction === "left") changeCar("next");
     if (event.direction === "right") changeCar("prev");
@@ -112,4 +112,18 @@ function SwipeCar(arg) {
       SubmitCarButton.textContent = "Wybierz " + currentCarRegNr;
     }
   }
+}
+function Fileloader() {
+  function showLoading() {
+    document.getElementById("loading_gif").style = "visibility: visible";
+  }
+  $("#add_document").click(function () {
+    if (
+      $("#inputOddometer").val() &&
+      $("#amount").val() &&
+      $("#upload_image").val()
+    ) {
+      showLoading();
+    }
+  });
 }
