@@ -1,35 +1,36 @@
-    <div class="d-flex text-center align-items-center" id="menu">
-        <a href="?page=start-ride" class="
+<div class="d-flex text-center align-items-center" id="menu">
+    <a href="?page=start-ride" class="
     <?php if ($_GET['page'] === 'start-ride') echo 'active_menu'
     ?>
      col-4 g-0">
-            <div class="" id="menu-item">
-                <i class="bi bi-car-front-fill"></i>
-                <div>Dodaj Podróż</div>
-            </div>
-        </a>
-        <a href="?page=add-document" class="
+        <div class="" id="menu-item">
+            <i class="bi bi-car-front-fill"></i>
+            <div>Dodaj Podróż</div>
+        </div>
+    </a>
+    <a href="?page=add-document" class="
     <?php if ($_GET['page'] === 'add-document') echo 'active_menu'
     ?>
     col-4 g-0">
-            <div class="" id="menu-item">
-                <i class="bi bi-file-plus"></i>
-                <div>Dodaj Fakturę</div>
-            </div>
-        </a>
+        <div class="" id="menu-item">
+            <i class="bi bi-file-plus"></i>
+            <div>Dodaj Fakturę</div>
+        </div>
+    </a>
 
-        <a href="?page=raport" class="
+    <a href="?page=raport" class="
     <?php if (!isset($_GET['page']) || $_GET['page'] === 'raport') echo 'active_menu'
     ?>
     col-4 g-0">
-            <div class="" id="menu-item-last">
-                <i class="bi bi-receipt-cutoff"></i>
-                <div>Raport</div>
-            </div>
-        </a>
-    </div>
-    </div>
-    <script>
+        <div class="" id="menu-item-last">
+            <i class="bi bi-receipt-cutoff"></i>
+            <div>Raport</div>
+        </div>
+    </a>
+</div>
+</div>
+<script>
+    if (['iPad', 'iPhone', 'iPod'].indexOf(navigator.platform) >= 0) {} else {
         const inputs = ['amount', 'inputOddometer', 'fileToUpload', 'odometer_start', 'administration_ride'];
         for (let i = 0; i < inputs.length; i++) {
             $("#" + inputs[i]).focus(
@@ -42,13 +43,14 @@
                 });
 
         }
-        window.onload = function() {
-            setModal();
+    }
+    window.onload = function() {
+        setModal();
 
-        }
-    </script>
+    }
+</script>
 
 
-    </body>
+</body>
 
-    </html>
+</html>
