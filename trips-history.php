@@ -16,12 +16,11 @@
             <tr>
 
                 <?php get_trips();
+                foreach ($_SESSION['business_trips'] as $value) {
 
-
-                foreach ($_SESSION['trips'] as $value) {
                     if ($value['delegation_or_administration'] == 'delegation') {
-                        $type = 'del';
-                    } else $type = "adm";
+                        $type = 'DEL';
+                    } else $type = "ADM";
                     $index = array_search($value['car'], $_SESSION['arrayOfcars']['id']);
                     $car = $_SESSION['arrayOfcars']['car_model'][$index];
                     echo '
@@ -29,7 +28,7 @@
                 '
                         . $type . '
                  </td>
-                <td>' . explode(" ", $value['date'])[0] . '</td>
+                <td>' . explode(" ", $value['start_date'])[0] . '</td>
                 <td>' . $value['distance'] . '</td>
                 <td>' . $car . '</td>
 

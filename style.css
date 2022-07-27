@@ -186,3 +186,6 @@ table tr td {
 #loading_gif {
   visibility: hidden;
 }
+#active_trip {
+  color: #267f57;
+}

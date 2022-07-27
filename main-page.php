@@ -4,7 +4,11 @@ if (
   isset($_SESSION['logedin']) && $_SESSION['logedin'] === 1 && isset($_SESSION['username'])
   && isset($_SESSION['car_reg_nr']) && $_SESSION['userinfo'] === $_SERVER['HTTP_USER_AGENT']
 ) {
-  include 'raport.php';
+  if (isset($_SESSION['active_trip']) && $_SESSION['active_trip'] !== 0) {
+    include 'start-ride.php';
+  } else {
+    include 'raport.php';
+  }
   include 'footer.php';
 }
 //If user is not loged in show the login page

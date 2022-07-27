@@ -13,7 +13,7 @@
                 </div>
                 <div class="col-12 d-flex justify-content-between" id="car-description">
                     <div class="" id="car-brand"><?php echo $_SESSION['arrayOfcars']['car_model'][$i] ?></div>
-                    <div class="" id="car-mileage"><?php echo $_SESSION['arrayOfcars']['oddometer'][$i] ?></div>
+                    <div class="" id="car-mileage"><?php echo $_SESSION['arrayOfcars']['oddometer'][$i] ?> km</div>
                     <div class=" " id="car-plates"><?php echo $_SESSION['arrayOfcars']['reg_nr'][$i] ?></div>
                 </div>
                 <input type="hidden" id="car_reg_nr" value="<?php echo $_SESSION['arrayOfcars']['reg_nr'][$i] ?>">

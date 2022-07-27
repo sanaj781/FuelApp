@@ -8,6 +8,11 @@
     ?>
   </div>
   <div class="col-7">
+    <?php
+    if (isset($_SESSION['active_trip']) && $_SESSION['active_trip'] !== 0) {
+    ?>
+      <div class="pb-2" id="active_trip">Aktywnych Wyjazdów: 1</div>
+    <?php } ?>
     <div class="pb-2" id="planned-budget">Planowany budżet: <?php echo $_SESSION['budget']; ?> zl</div>
     <div class="pb-2" id="planned-budget">Wydatki: <?php echo $_SESSION['current_expences']; ?> zl</div>
     <div class="pb-2" id="planned-budget">Pozostalo: <?php echo $_SESSION['budget'] - $_SESSION['current_expences']; ?> zl</div>

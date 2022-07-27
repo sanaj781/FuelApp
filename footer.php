@@ -30,7 +30,7 @@
     </div>
     </div>
     <script>
-        const inputs = ['amount', 'inputOddometer', 'fileToUpload', 'distance', 'administration_ride'];
+        const inputs = ['amount', 'inputOddometer', 'fileToUpload', 'odometer_start', 'administration_ride'];
         for (let i = 0; i < inputs.length; i++) {
             $("#" + inputs[i]).focus(
                 function() {
@@ -42,8 +42,6 @@
                 });
 
         }
-
-
         window.onload = function() {
             setModal();
 
