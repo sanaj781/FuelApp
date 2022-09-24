@@ -1,1 +1,1 @@
-Mobile  FleetManager App created for internal for my current company
+Mobile  FleetManager App created for internal use of my current company
